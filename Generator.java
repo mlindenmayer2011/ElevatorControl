@@ -1,50 +1,47 @@
-public class Simulator 
-{
-    private static Random RND = new Random();
-    private static int time = 0;
-    private static double averageWait = 0;
-    private static Elavator e1;
-    private static Controls c1 = e1.controls;
-    private static Person[] p;
- 
-    public static void update () {
-        averageWait += e1.unloadPassengers();
-        if (averageWait > 0) {
-            averageWait = averageWait / 2;
+import java.util.Random;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+public class Generator {
+
+    private final static Random RND = new Random();
+    private final static String FILE = "data.txt";
+
+    public static void main (String[] args) {
+        PrintWriter out = null;
+        int numFloors = 0, numPeople = 0;
+        try {
+            out = new PrintWriter(new FileWriter(FILE));
+            numFloors = Integer.parseInt(args[0]);
+            numPeople = Integer.parseInt(args[1]);
+        } catch (Exception e) {
+            System.out.println("Invalid Input:");
         }
-        for (int i = 0; i < p.length; i++) {
-            if (p[i].dest == e1.getFloor()) {
-                if(loadPassenger(p[i])) { 
-                    //loading failed so repress the call button
-                    (dest - star) > 0 ? c1.pressUP(start):c1.pressDown(start);
+
+        int workHours = 60 * 60 * 8;
+        int shift = workHours / 2;
+        int width = workHours / 8;
+        int cnt = 0;
+
+        double probPerson = (double)numPeople / workHours;
+        double probFloor  = 1.0 / numFloors;
+
+        for (int i =0; i < workHours; i++) {
+            double p = ((i-shift)/30000)*Math.sin((i-shift)/3500);
+            int start = RND.nextInt(numFloors+1), end = RND.nextInt(numFloors+1);
+            if (RND.nextDouble() < (p+1) * probPerson) {
+                if (RND.nextDouble() > p + 0.6) {
+                    start = 0;
+                } else if (RND.nextDouble() < p + 0.6) {
+                    end = 0;
+                }
+                if (start != end) {
+                    out.println(start + " " + end + " " + i);
+                    cnt++;
                 }
             }
-        } 
- 
-        time++;
-    }
- 
-    public static void main (String[] args) {
-        int numFloors = Integer.parseInt(args[0]);
-        int maxCapacity = Integer.parseInt(args[1]);
-        int numPeople = Integer.parseInt(args[2]);
- 
-        e1 = new Elavator(maxCapacity, numFloors);   
-        p = new Person[numPeople];
- 
- 
-        for (int i = 0; i < numPeople; i++) {
-            int start = 0; dest = 0;
-            while (start == dest) {
-                start = RND.nextInt(numFloors);
-                dest = RND.nextInt(numFloors);
-            }
-            (dest - start) > 0 ? c1.pressUp(start) : c1.pressDown(start);
-            p[i] = new Person (start, dest, 0);
         }
- 
+        System.out.println(cnt);
+        out.close();
     }
- 
-    public static int getTime () { return time; }
-    
 }
