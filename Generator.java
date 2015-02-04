@@ -1,3 +1,5 @@
+package elevatorSimulator;
+
 import java.util.Random;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -18,6 +20,12 @@ public class Generator {
             System.out.println("Invalid Input:");
         }
 
+        // Prints into file number of floors
+        // and people. Used in creating the right amount
+        // of floor and people objects.
+        out.println( numFloors );
+        out.println( numPeople );
+        
         int workHours = 60 * 60 * 8;
         int shift = workHours / 2;
         int width = workHours / 8;

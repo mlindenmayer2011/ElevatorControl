@@ -3,6 +3,7 @@ package elevatorSimulator;
 public class Person {
 
     private int m_start, m_dest, m_time;
+    
     Person (int start, int dest, int time) {
         this.m_start = start;
         this.m_dest = dest;
