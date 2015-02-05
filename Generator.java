@@ -38,10 +38,17 @@ public class Generator {
             double p = ((i-shift)/30000)*Math.sin((i-shift)/3500);
             int start = RND.nextInt(numFloors+1), end = RND.nextInt(numFloors+1);
             if (RND.nextDouble() < (p+1) * probPerson) {
-                if (RND.nextDouble() > p + 0.6) {
-                    start = 0;
-                } else if (RND.nextDouble() < p + 0.6) {
-                    end = 0;
+                if (RND.nextDouble() > p + 0.6) {        
+                    start = 1 + RND.nextInt(numFloors);
+                    if (RND.nextDouble() < 0.6 || start == 1)
+                        end = 0;
+                    else
+                        end = RND.nextInt(start - 1);
+                } else {
+                    start = RND.nextInt(numFloors+1);
+                    if (RND.nextDouble() < 0.6 || start == numFloors) 
+                        start = 0;
+                    end = start + RND.nextInt(numFloors - start);
                 }
                 if (start != end) {
                     out.println(start + " " + end + " " + i);
