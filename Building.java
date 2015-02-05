@@ -32,9 +32,6 @@ public class Building {
 				Floor floor = new Floor();
 				floors.add(floor);
 			}
-			//for not to accommodate the current file
-			stdIn.nextInt();
-			stdIn.nextInt();
 			while(stdIn.hasNext()){
 				//run through the rest of the file
 				final int startFloor = stdIn.nextInt();
