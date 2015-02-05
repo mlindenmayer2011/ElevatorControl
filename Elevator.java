@@ -44,18 +44,18 @@ public class Elevator {
     }
  
     public void add () {
-        building.get(floor).putOnElevator( direction );
+        building.get(m_floor).putOnElevator( m_direction );
     }
  
     public void removePassenger (int i) {
-        passengers.remove(i);
+        m_passengers.remove(i);
     }
  
     public ArrayList<Person> unloadPassengers () {
         ArrayList<Person> p;
-        for (int i = 0; i < passengers.length; i++) {
-            if (passengers.get(i) == floor) {
-                p.add(passengers.get(i));
+        for (int i = 0; i < m_passengers.length; i++) {
+            if (m_passengers.get(i) == m_floor) {
+                p.add(m_passengers.get(i));
                 removePassenger(i);
             }
         }
