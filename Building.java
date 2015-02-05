@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Building {
 	
 	private int time = 0;
+	private int pplServiced = 0;
+	private int totalWaitTime = 0;
 	
 	private ArrayList<Person> personQueue = new ArrayList<>;
 	
@@ -57,6 +59,28 @@ public class Building {
 				if(p.getTime() == time){
 					floor.addPerson(p);
 				}
+			}
+			//use the current floor to move ppl on the elevator
+			final int currentFloor = mainElevator.getFloor();
+			boolean elevatorStatusChanged = false;
+			ArrayList<Person> unloadedPassengers = new ArrayList<>;
+			//remove people from the elevator first
+			unloadedPassengers = mainElevator.unloadPassengers();
+			
+			for(int i=0;i<unloadPassengers.size();i++){
+				Person p = unloadedPassengers.objectAtIndex(i);
+				pplServiced ++;
+				totalWaitTime += time - p.getTime();
+			}
+			
+			
+			//get a return value here so we can check if someone actually got on the elevator???
+			floors.objectAtIndex(currentFloor).putOnElevator(mainElevator);
+			
+			if(elevatorStatusChanged){
+				
+			} else {
+				mainElevator.nextFloor;
 			}
 			
 			time ++; //increment the time
