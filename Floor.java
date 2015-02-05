@@ -1,45 +1,53 @@
+package elevatorSimulator;
+
 import java.util.ArrayList;
 
-public class Floor {
+//import java.util.ArrayList;
 
-	private boolean up = false, down = false;
+public class Floor {
 	
-	private ArrayList<Person> people;
+	// Used to compare to persons direction
+	final int DOWN = -1, UP = 1;
+	// Represent buttons
+	boolean up = false, down = false;
+	
+	private ArrayList<Person> m_people = new ArrayList<>();
 	
 	// Constructor
-	Floor( Elevator elevator ) { }
+	Floor() { }
 	
-	// Adds person to the floor
+	// Adds person to the floor and updates buttons
 	public void addPerson( Person p ) {
-		people.add(p);
-		setDir();
+		m_people.add(p);
+		setDir(p);
 	}
 	
 	// Later change to binary search
 	// Moves person to elevator
-	public void putOnElevator( boolean dir ) {
-		for(int i = 0; i < people.length(); i++) {
-			if( people.dir == dir) {
-				if( elevator.weight + people.get(i) <= elevator.limit ) { // Determines if person can fit on elevator
-					elevator.add( people.get(i) );
-					people.remove(i);
+	public void putOnElevator( Elevator elevator ) {
+		for(int i = 0; i < m_people.size(); i++) {
+			if( m_people.get(i).getStart() == elevator.getFloor() ) {
+				// Determines if person can fit on elevator
+				if( elevator.getWeight() + m_people.get(i).getWeight() <= elevator.getCapacity() ) { 
+					elevator.add( m_people.get(i) );
+					m_people.remove(i);
 				}
 			}
 		}
 		
+		// Resets button to not pressed
 		up = false;
 		down = false;
 		
-		// checks all people on floor and updates button
-		for(int i = 0; i < people.length(); i++) {
-			setDir( people.get(i) );
+		// Rechecks all people left on floor and updates button
+		for(int i = 0; i < m_people.size(); i++) {
+			setDir( m_people.get(i) );
 		}
 	}
 	
 	// sets buttons of floor
 	private void setDir(Person p) {
-		if( p.dir == UP ) { up = true; }
+		if( p.getDir() == UP ) { up = true; }
 		else { down = true; }
 	}
-	
 }

@@ -9,7 +9,7 @@ public class Building {
 
 	public static void main(String[] args) {
 	
-		File file = new File("simulatorData.txt");
+		File file = new File("data.txt");
 		
 		ArrayList<Floor> floors = new ArrayList<>();
 		
@@ -28,10 +28,6 @@ public class Building {
 			stdIn.close();
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
-		}
-		
-		for(int i = 0; i < floors.size(); i++) {
-			System.out.println(i);
 		}
 	}
 }

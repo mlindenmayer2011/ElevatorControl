@@ -29,11 +29,13 @@ public class Generator {
         int workHours = 60 * 60 * 8;
         int shift = workHours / 2;
         int width = workHours / 8;
-        int cnt = 0;
+        int cnt = 0; //What is this?
 
         double probPerson = (double)numPeople / workHours;
         double probFloor  = 1.0 / numFloors;
 
+        //Calculates the time a person will be created,
+        //their start and their end.
         for (int i =0; i < workHours; i++) {
             double p = ((i-shift)/30000)*Math.sin((i-shift)/3500);
             int start = 0, end = 0;
@@ -51,7 +53,7 @@ public class Generator {
                     end = start + RND.nextInt(numFloors - start);
                 }
                 if (start != end) {
-                    out.println(start + " " + end + " " + i);
+                    out.println(i + " " + start + " " + end);
                     cnt++;
                 }
             }
