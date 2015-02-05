@@ -36,7 +36,7 @@ public class Generator {
 
         for (int i =0; i < workHours; i++) {
             double p = ((i-shift)/30000)*Math.sin((i-shift)/3500);
-            int start = RND.nextInt(numFloors+1), end = RND.nextInt(numFloors+1);
+            int start = 0, end = 0;
             if (RND.nextDouble() < (p+1) * probPerson) {
                 if (RND.nextDouble() > p + 0.6) {        
                     start = 1 + RND.nextInt(numFloors);
