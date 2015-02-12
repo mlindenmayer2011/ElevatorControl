@@ -4,14 +4,16 @@ import java.util.ArrayList;
  
 public class Elevator {
  
-	final int DOWN = -1, UP = 1;
+	final static int DOWN = -1;
+
+	static final int UP = 1;
  
     private boolean[] m_floorControls;// Tells if person needs to get off on floor
-    private int m_topFloor;
-    private int m_floor = 0; // Floor elevator is currently on
-    private int m_weight = 0; // Current weight
-    private int m_capacity; // Max weight allowed on elevator
-    private int m_direction;
+    private static int m_topFloor;
+    private static int m_floor = 0; // Floor elevator is currently on
+    private static int m_weight = 0; // Current weight
+    private static int m_capacity; // Max weight allowed on elevator
+    private static int m_direction;
     private ArrayList<Person> m_passengers;
  
     // Constructor
@@ -19,6 +21,8 @@ public class Elevator {
         m_topFloor = numFloors;
         m_floorControls = new boolean[ m_topFloor ];
         m_capacity = capacity;
+        m_passengers = new ArrayList<>();
+        m_direction = UP;
     }
  
     // Accessor methods //////////////////////////////
@@ -31,20 +35,20 @@ public class Elevator {
     
     public static void nextFloor () {
         if (m_direction == UP && m_floor < m_topFloor) {
-            floor++;
-        } else if (direction == DOWN && floor > 0) {
-            floor--;
+            m_floor++;
+        } else if (m_direction == DOWN && m_floor > 0) {
+            m_floor--;
         } else {
-            switch (direction) {
-                case UP: direction = DOWN; break;
-                case DOWN: direction = UP; break;
+            switch (m_direction) {
+                case UP: m_direction = DOWN; break;
+                case DOWN: m_direction = UP; break;
             }
         }
-        totalFloors++;
+        //totalFloors++;
     }
  
-    public void add () {
-        building.get(m_floor).putOnElevator( m_direction );
+    public void add (Person p) {
+    	m_passengers.add(p);
     }
  
     public void removePassenger (int i) {
@@ -52,9 +56,9 @@ public class Elevator {
     }
  
     public ArrayList<Person> unloadPassengers () {
-        ArrayList<Person> p;
-        for (int i = 0; i < m_passengers.length; i++) {
-            if (m_passengers.get(i) == m_floor) {
+        ArrayList<Person> p = new ArrayList<>();
+        for (int i = 0; i < m_passengers.size(); i++) {
+            if (m_passengers.get(i).getDest() == m_floor) {
                 p.add(m_passengers.get(i));
                 removePassenger(i);
             }

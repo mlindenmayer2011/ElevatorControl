@@ -24,13 +24,15 @@ public class Floor {
 	
 	// Later change to binary search
 	// Moves person to elevator
-	public void putOnElevator( Elevator elevator ) {
+	public int putOnElevator( Elevator elevator ) {
+		int changed = 0;
 		for(int i = 0; i < m_people.size(); i++) {
 			if( m_people.get(i).getStart() == elevator.getFloor() ) {
 				// Determines if person can fit on elevator
 				if( elevator.getWeight() + m_people.get(i).getWeight() <= elevator.getCapacity() ) { 
 					elevator.add( m_people.get(i) );
-					m_people.remove(i);
+					m_people.remove(i--);
+					changed ++;
 				}
 			}
 		}
@@ -43,6 +45,8 @@ public class Floor {
 		for(int i = 0; i < m_people.size(); i++) {
 			setDir( m_people.get(i) );
 		}
+		
+		return changed;
 	}
 	
 	// sets buttons of floor

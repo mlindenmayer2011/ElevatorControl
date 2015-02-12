@@ -24,7 +24,6 @@ public class Generator {
         // and people. Used in creating the right amount
         // of floor and people objects.
         out.println( numFloors );
-        out.println( numPeople );
         
         int workHours = 60 * 60 * 8;
         int shift = workHours / 2;
