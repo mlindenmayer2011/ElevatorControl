@@ -32,7 +32,7 @@ public class ElevatorFrame extends JFrame implements ActionListener
         dest.add(y);
 
         unload.setRepeats(false);
-        speed.setRepeats(false);
+        speed.setRepeats(true);
 
         setSize(WIDTH, HEIGHT);
         setVisible(true);
