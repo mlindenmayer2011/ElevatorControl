@@ -76,7 +76,7 @@ public class ElevatorFrame extends JFrame implements ActionListener
 
 
     public static void main (String[] args) {
-        Elevator e = new Elevator(5);
+        ElevatorFrame e = new ElevatorFrame(5);
         for (int i = 0; i < 4; i++)
             e.nextFloor(UP);
         for (int i = 0; i < 4; i++)
