@@ -33,19 +33,21 @@ public class Elevator {
     public int getDirection() { return m_direction; }
     //////////////////////////////////////////////////
     
-    public static void nextFloor () {
-        if (m_direction == UP && m_floor < m_topFloor) {
-            m_floor++;
-        } else if (m_direction == DOWN && m_floor > 0) {
-            m_floor--;
-        } else {
-            switch (m_direction) {
-                case UP: m_direction = DOWN; break;
-                case DOWN: m_direction = UP; break;
-            }
-        }
-        //totalFloors++;
+    public static void moveUp () {
+        m_floor ++;
     }
+	
+	public static void moveDown () {
+        m_floor --;
+    }
+	
+	public static void switchDirection() {
+		if(m_direction == UP){
+			m_direction = DOWN;
+		} else {
+			m_direction = UP;
+		}
+	}
  
     public void add (Person p) {
     	m_passengers.add(p);

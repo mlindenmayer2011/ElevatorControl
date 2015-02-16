@@ -56,6 +56,7 @@ public class Building {
 		
 		//create a loop that will loop through the day
 		Elevator mainElevator = new Elevator(floors.size()-1,10);
+		Driver mainDriver = new Driver(floors.size()-1,1);
 		int waitTime = 0;
 		while(time < 60*60*8 + 100) { //time in the workday
 			//System.out.println("Time : " + time);
@@ -98,7 +99,7 @@ public class Building {
 					waitTime = pplOn * 5 + pplOff * 5;
 				} else {
 					waitTime = 4;
-					mainElevator.nextFloor();
+					mainDriver.moveElevator(mainElevator);
 					runCost ++;
 					//System.out.println("Elevator Floor : " + mainElevator.getFloor());
 				}
