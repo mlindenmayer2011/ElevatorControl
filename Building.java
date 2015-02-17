@@ -1,31 +1,48 @@
 package elevatorSimulator;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.GridLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Building {
-	
-	private static int time = 0;
-	private static int pplServiced = 0;
-	private static int totalWaitTime = 0;
-	private static int runCost = 0;
-	
-	private static ArrayList<Person> personQueue = new ArrayList<>();
-	
+import javax.swing.JFrame;
 
-	public static void main(String[] args) {
+public class Building extends JFrame {
 	
+	private int time = 0;
+	private int pplServiced = 0;
+	private int totalWaitTime = 0;
+	private int runCost = 0;
+	
+	private ArrayList<Person> personQueue = new ArrayList<>();
+	private ArrayList<Floor> floors = new ArrayList<>();
+	private Elevator mainElevator;
+	private Driver mainDriver;
+	
+	public Building ()
+	{
+		loadLevels();
+		
+		mainElevator = new Elevator(this, floors.size()-1,10);
+		mainDriver = new BaseDriver(floors.size()-1,1);
+		
+		setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		add(mainElevator);
+		setSize(500, 700);
+		setVisible(true);
+		runLoop();
+	}
+	
+	public void loadLevels()
+	{
 		File file = new File("data.txt");
 		
-		ArrayList<Floor> floors = new ArrayList<>();
-		
-		// Checks for correct file name.
 		try {
-			
 			Scanner stdIn = new Scanner(file);
-			
 			// Takes first number of file.
 			// Which correlates to number of floors.
 			// Then creates floors and adds them to floors list.
@@ -48,15 +65,11 @@ public class Building {
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		runLoop(floors);
 	}
 	
-	public static void runLoop(ArrayList<Floor> floors) {
+	public void runLoop() {
 		
 		//create a loop that will loop through the day
-		Elevator mainElevator = new Elevator(floors.size()-1,10);
-		Driver mainDriver = new Driver(floors.size()-1,1);
 		int waitTime = 0;
 		while(time < 60*60*8 + 100) { //time in the workday
 			//System.out.println("Time : " + time);
@@ -115,4 +128,13 @@ public class Building {
 		float finalResult = totalWaitTime/pplServiced;
 		System.out.println("AVG WAIT : " + finalResult + "("+pplServiced+","+totalWaitTime+") Run Cost : " + runCost);
 	}
+	
+	public static void main(String[] args) {
+	
+		Building b = new Building ();
+
+		
+	}
+	
+
 }
