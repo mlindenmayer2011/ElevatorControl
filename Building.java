@@ -112,7 +112,7 @@ public class Building extends JFrame {
 					waitTime = pplOn * 5 + pplOff * 5;
 				} else {
 					waitTime = 4;
-					mainDriver.moveElevator(mainElevator);
+					mainDriver.moveElevator(this);
 					runCost++;
 					// System.out.println("Elevator Floor : " +
 					// mainElevator.getFloor());
@@ -129,6 +129,9 @@ public class Building extends JFrame {
 				+ "," + totalWaitTime + ") Run Cost : " + runCost);
 	}
 
+	public Elevator getElevator() { return mainElevator; }
+	public ArrayList<Floor> getFloors() { return floors; }
+	
 	public static void main(String[] args) {
 
 		Building b = new Building();
