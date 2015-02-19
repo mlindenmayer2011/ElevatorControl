@@ -59,4 +59,7 @@ public class Floor {
 			down = true;
 		}
 	}
+	
+	public boolean getUpStatus() { return up; }
+	public boolean getDownStatus() { return down; }
 }
