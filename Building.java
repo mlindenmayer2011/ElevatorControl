@@ -26,7 +26,7 @@ public class Building extends JFrame {
 		loadLevels();
 
 		mainElevator = new Elevator(this, floors.size() - 1, 10);
-		mainDriver = new BaseDriver(floors.size() - 1, 1);
+		mainDriver = new SmartDriver(floors.size() - 1, 1);
 
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

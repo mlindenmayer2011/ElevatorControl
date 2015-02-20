@@ -7,7 +7,9 @@ import java.util.ArrayList;
 public class Floor {
 
 	// Used to compare to persons direction
-	final int DOWN = -1, UP = 1;
+	public static final int DOWN = -1;
+	public static final int IDLE = 0;
+	public static final int UP = 1;
 	// Represent buttons
 	boolean up = false, down = false;
 
@@ -60,6 +62,9 @@ public class Floor {
 		}
 	}
 	
-	public boolean getUpStatus() { return up; }
-	public boolean getDownStatus() { return down; }
+	public int getStatus() { 
+		if(up = true) { return UP; }
+		else if(down = true) { return DOWN; }
+		else { return IDLE; }
+	}
 }
