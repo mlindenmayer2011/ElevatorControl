@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class SmartDriver implements Driver {
 
 	private final int m_numFloors;
-	public static final int DOWN = -1;
-	public static final int IDLE = 0;
-	public static final int UP = 1;
+
+	// private int m_elevators[];
 
 	SmartDriver(int floorCount, int elevatorCount) {
 		m_numFloors = floorCount;
@@ -19,29 +18,16 @@ public class SmartDriver implements Driver {
 		Elevator elevator = building.getElevator();
 		ArrayList<Floor> floors = building.getFloors();
 		
-		//In case elevator is on top floor or bottom floor
-		if (elevator.getDirection() == UP && elevator.getFloor() == m_numFloors) {
-			elevator.switchDirection();
-		} else if (elevator.getDirection() == DOWN && elevator.getFloor() == 0) {
-			elevator.switchDirection();
-		}
 		
-		//For going up
-		if (elevator.getDirection() == UP) {			
-			for (int i = elevator.getFloor() + 1; i < floors.size(); i++) {
-				if (floors.get(i).getStatus() == UP) {
-					elevator.moveUp();
-				}
-			}
-		//For going down
-		} else if (elevator.getDirection() == DOWN) {
-			for (int i = elevator.getFloor() - 1; i > floors.size(); i--) {
-				if (floors.get(i).getStatus() == DOWN) {
-					elevator.moveDown();
-				}
-			}
+		
+		
+		
+		if (elevator.getDirection() == UP && elevator.getFloor() < m_numFloors) {
+			elevator.moveUp();
+		} else if (elevator.getDirection() == DOWN && elevator.getFloor() > 0) {
+			elevator.moveDown();
 		} else {
-			elevator.makeIdle();
+			elevator.switchDirection();
 		}
 	}
 }

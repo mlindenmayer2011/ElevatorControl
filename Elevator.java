@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class Elevator extends Container {
 	public static final int DOWN = -1;
-	public static final int IDLE = 0;
 	public static final int UP = 1;
 
 	// Elevator Structure
@@ -73,18 +72,16 @@ public class Elevator extends Container {
 		return m_direction;
 	}
 
-	//////////////////////////////////////////////////
+	// ////////////////////////////////////////////////
 
 	public void moveUp() {
 		m_floor++;
 		m_canvas.addDestination(m_floor);
-		m_direction = UP;
 	}
 
 	public void moveDown() {
 		m_floor--;
 		m_canvas.addDestination(m_floor);
-		m_direction = DOWN;
 	}
 
 	public void switchDirection() {
@@ -95,10 +92,6 @@ public class Elevator extends Container {
 		}
 	}
 
-	public void makeIdle() {
-		m_direction = IDLE;
-	}
-	
 	public void add(Person p) {
 		m_passengers.add(p);
 		m_canvas.addPerson();
