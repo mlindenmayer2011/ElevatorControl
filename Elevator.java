@@ -100,11 +100,13 @@ public class Elevator extends Container {
 	}
 	
 	public void add(Person p) {
+		m_weight += p.getWeight();
 		m_passengers.add(p);
 		m_canvas.addPerson();
 	}
 
 	public void removePassenger(int i) {
+		m_weight -= m_passengers.get(i).getWeight();
 		m_passengers.remove(i);
 		m_canvas.removePerson();
 	}

@@ -62,9 +62,12 @@ public class Floor {
 		}
 	}
 	
-	public int getStatus() { 
-		if(up = true) { return UP; }
-		else if(down = true) { return DOWN; }
-		else { return IDLE; }
+	public boolean getUpStatus() { 
+		if (up) { return true; }
+		else    { return false; }
+	}
+	public boolean getDownStatus() { 
+		if (down) { return true; }
+		else      { return false; }
 	}
 }

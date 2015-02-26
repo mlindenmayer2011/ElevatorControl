@@ -55,8 +55,7 @@ public class Building extends JFrame {
 				final int startFloor = stdIn.nextInt();
 				final int endFloor = stdIn.nextInt();
 				final int startTime = stdIn.nextInt();
-				Person newPerson = new Person(startFloor, endFloor, startTime,
-						1);
+				Person newPerson = new Person(startFloor, endFloor, startTime, 1);
 				personQueue.add(newPerson);
 				pplCount++;
 			}
