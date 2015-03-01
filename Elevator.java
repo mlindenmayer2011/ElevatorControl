@@ -25,8 +25,11 @@ public class Elevator extends Container {
 	private int m_floor = 0; // Current Position.
 	private int m_weight = 0; // Current Weight.
 	private int m_direction; // UP, DOWN, STOPPED;
-	private int m_waitTime; // Delay (ms) when arriving at floor.
+	private int m_waitTime = 0; // Delay (ms) when arriving at floor.
+	private int m_runCost = 0;
 	private ArrayList<Person> m_passengers;
+	
+	private static boolean validFloor[] = null;
 
 	// Canvas
 	ElevatorCanvas m_canvas;
@@ -72,19 +75,43 @@ public class Elevator extends Container {
 	public int getDirection() {
 		return m_direction;
 	}
+	
+	public int getWaitTime(){
+		return m_waitTime;
+	}
+	
+	public void setWaitTime(int t){
+		m_waitTime = t;
+	}
+	
+	public void reduceWait(){
+		m_waitTime --;
+	}
+	
+	public int getRunCost(){
+		return m_runCost;
+	}
 
 	//////////////////////////////////////////////////
 
 	public void moveUp() {
-		m_floor++;
-		m_canvas.addDestination(m_floor);
-		m_direction = UP;
+		if(m_floor < m_topFloor){
+			m_floor++;
+			m_canvas.addDestination(m_floor);
+			m_direction = UP;
+			m_runCost ++;
+			m_waitTime = 4;
+		}
 	}
 
 	public void moveDown() {
-		m_floor--;
-		m_canvas.addDestination(m_floor);
-		m_direction = DOWN;
+		if(m_floor > 0){
+			m_floor--;
+			m_canvas.addDestination(m_floor);
+			m_direction = DOWN;
+			m_runCost ++;
+			m_waitTime = 4;
+		}
 	}
 
 	public void switchDirection() {

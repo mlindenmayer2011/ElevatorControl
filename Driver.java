@@ -1,8 +1,11 @@
 package elevatorSimulator;
 
-public interface Driver {
-	public static final int UP = 1;
-	public static final int DOWN = -1;
+import java.util.ArrayList;
 
-	public void moveElevator(Building building);
+public interface Driver {
+	public static final int DOWN = -1;
+	public static final int IDLE = 0;
+	public static final int UP = 1;
+
+	public void moveElevator(ArrayList<Floor> floors, Elevator elevator);
 }

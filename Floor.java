@@ -18,6 +18,11 @@ public class Floor {
 	// Constructor
 	Floor() {
 	}
+	
+	Floor(boolean u, boolean d){
+		up = u;
+		down = d;
+	}
 
 	// Adds person to the floor and updates buttons
 	public void addPerson(Person p) {
@@ -66,8 +71,17 @@ public class Floor {
 		if (up) { return true; }
 		else    { return false; }
 	}
+	
+	public void setUpStatus(boolean b){
+		up = b;
+	}
+	
 	public boolean getDownStatus() { 
 		if (down) { return true; }
 		else      { return false; }
+	}
+	
+	public void setDownStatus(boolean b){
+		down = b;
 	}
 }

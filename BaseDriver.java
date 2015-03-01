@@ -1,5 +1,7 @@
 package elevatorSimulator;
 
+import java.util.ArrayList;
+
 public class BaseDriver implements Driver {
 
 	private final int m_numFloors;
@@ -12,9 +14,8 @@ public class BaseDriver implements Driver {
 
 	// here is the algorithm for the base line model
 	@Override
-	public void moveElevator(Building building) {
+	public void moveElevator(ArrayList<Floor> floors, Elevator elevator) {
 		
-		Elevator elevator = building.getElevator();
 		
 		if (elevator.getDirection() == UP && elevator.getFloor() < m_numFloors) {
 			elevator.moveUp();
