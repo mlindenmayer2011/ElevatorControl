@@ -37,7 +37,7 @@ public class SmartDriver implements Driver {
 	    } else {
 	    	
 	    	int belowFloors = 0, aboveFloors = 0;
-	    	boolean topFloorCheck = false;
+	    	boolean topFloorCheck = false, firstCheck = false;
 	    	
 	    	
 	    	for (int i = 0 ; i < m_numFloors; i++) {
@@ -50,13 +50,22 @@ public class SmartDriver implements Driver {
 	    		}
 	    	}
 	    	
-	    	/*
+	    	// Checks if elevator is in bottom half of building and if up
+	    	// is pressed on first floor
+	    	if (floors.get(0).getUpStatus() && elevator.getFloor() < (m_numFloors/2)){
+	    		firstCheck = true;
+	    	}
+	    	
+	    	// Checks if elevator is in top half of building and if down
+	    	// is pressed on top floor
 	    	if (floors.get(m_numFloors).getDownStatus() && elevator.getFloor() >= (m_numFloors/2)){
 	    		topFloorCheck = true;
-	    	}*/
+	    	}
 	    	
 	    	if (belowFloors == 0 && aboveFloors == 0) {
 	    		//elevator.makeIdle();
+	    	} else if (firstCheck) {
+	    		elevator.moveDown();
 	    	} else if (topFloorCheck) {
 	    		elevator.moveUp();
 	    	} else if (belowFloors >= aboveFloors) {
