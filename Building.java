@@ -22,10 +22,14 @@ public class Building extends JFrame {
 	private ArrayList<Elevator> elevators = new ArrayList<>();
 	private Driver mainDriver;
 
-	public Building() {
+	public Building(int driver) {
 		loadLevels();
 		
-		mainDriver = new BaseDriver(floors.size() - 1, 1);
+		if (driver == 0) {
+			mainDriver = new BaseDriver(floors.size() - 1, 1);
+		} else {
+			mainDriver = new SmartDriver(floors.size() - 1, 1);
+		}
 
 		//setLayout(new BorderLayout());
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,7 +129,7 @@ public class Building extends JFrame {
 	
 	public static void main(String[] args) {
 
-		Building b = new Building();
+		//Building b = new Building();
 
 	}
 

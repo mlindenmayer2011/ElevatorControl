@@ -1,12 +1,16 @@
+package elevatorSimulator;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 
@@ -20,18 +24,33 @@ public class ElevatorStarter extends JFrame implements ActionListener {
 	JButton runButton = new JButton("Run!");
 	JButton generatorButton = new JButton("Generate New Data");
 	
+	JRadioButton smartDriverButton = new JRadioButton();
+	JRadioButton baseDriverButton = new JRadioButton();
+	
+	JLabel smartDriverLabel = new JLabel("Smart Driver: ");
+	JLabel baseDriverLabel = new JLabel("Base Driver: ");
+	
 	Container buttons = new Container();
 	Container results = new Container();
 
-	public Controls ()
+	public ElevatorStarter ()
 	{
 		resultsTextField.setEditable(false);
 		results.setLayout(new BorderLayout());
 		results.add(resultsTextField, BorderLayout.CENTER);
 		
 		buttons.setLayout(new GridLayout(0, 2));
-		//buttons.add(numFloorsLabel);
-		//buttons.add(numFloorsTextField);
+		
+		ButtonGroup probSelection = new ButtonGroup();
+		probSelection.add(smartDriverButton);
+		probSelection.add(baseDriverButton);
+
+		smartDriverButton.setSelected(true);
+		
+		buttons.add(smartDriverLabel);
+		buttons.add(smartDriverButton);
+		buttons.add(baseDriverLabel);
+		buttons.add(baseDriverButton);
 		buttons.add(runButton);
 		buttons.add(generatorButton);
 		
@@ -49,7 +68,11 @@ public class ElevatorStarter extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == runButton)
 		{
-			
+			Building b;
+			if (smartDriverButton.isSelected())
+				 b = new Building(1);
+			else
+				 b = new Building(0);
 		}
 		if (e.getSource() == generatorButton)
 		{
@@ -62,8 +85,8 @@ public class ElevatorStarter extends JFrame implements ActionListener {
 	
 	public static void main (String[] args) {
 		
-		Controls controlPanel = new Controls();
-		controlPanel.setSize(400, 300);
-		controlPanel.setVisible(true);
+		ElevatorStarter starter = new ElevatorStarter();
+		starter.setSize(400, 300);
+		starter.setVisible(true);
 	}
 }

@@ -1,3 +1,5 @@
+package elevatorSimulator;
+
 
 
 import java.awt.BorderLayout;
