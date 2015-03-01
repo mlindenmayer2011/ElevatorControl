@@ -26,48 +26,46 @@ public class SmartDriver implements Driver {
 		}
 		
 		// Checks to see if anyone is on elevator
-	    if (elevator.getWeight() == 0) {
-	    	elevator.makeIdle();
-		}
-		
-		// For going up if elevator is already going up
-		if (elevator.getDirection() == UP) {
-			elevator.moveUp();
-			
-		// For going down if elevator is already going down
-		} else if (elevator.getDirection() == DOWN) {			
-			elevator.moveDown();
-		} else {
-			int floorsUp = 0;
-			int floorsDown = 0;
-			
-			//////////////////////Doesn't Work//////////////////////////////////////////
-	
-			// Determines closest floor upwards
-			for (int i = elevator.getFloor() + 1; i <= m_numFloors; i++) {
-				if (floors.get(i).getUpStatus() && floorsUp == 0) {
-					floorsUp = i - elevator.getFloor(); // This breaks program
-				}
-			}
-			
-			// Determines closest floor downwards
-			for (int i = elevator.getFloor() - 1; i >= 0; i--) {
-				if (floors.get(i).getDownStatus() && floorsDown == 0) {
-					floorsDown = elevator.getFloor() - i;
-				}
-			}
-			//////////////////////////////////////////////////////////////////////////
-			
-			if (floorsUp == 0 && floorsDown == 0){
-				// Do nothing
-			// Moves up if closest floor is upwards or same distance as closest floor downwards
-		    } else if (floorsUp <= floorsDown) {
-				elevator.moveUp();
-			// Moves down if closest floor is downwards
-			} else if (floorsDown < floorsUp){
-				elevator.moveDown();
-			}
+	    if (elevator.getWeight() != 0) {
+	    	// For going up if elevator is already going up
+	    	if (elevator.getDirection() == UP) {
+	    		elevator.moveUp();
+			// For going down if elevator is already going down
+	    	} else if (elevator.getDirection() == DOWN) {			
+	    		elevator.moveDown();
+	    	}
+	    } else {
+	    	
+	    	int belowFloors = 0, aboveFloors = 0;
+	    	boolean topFloorCheck = false;
+	    	
+	    	
+	    	for (int i = 0 ; i < m_numFloors; i++) {
+	    		if (floors.get(i).getDownStatus() || floors.get(i).getUpStatus()) {
+	    			if (i < elevator.getFloor()) {
+	    				belowFloors++;
+	    			} else {
+	    				aboveFloors++;
+	    			}
+	    		}
+	    	}
+	    	
+	    	/*
+	    	if (floors.get(m_numFloors).getDownStatus() && elevator.getFloor() >= (m_numFloors/2)){
+	    		topFloorCheck = true;
+	    	}*/
+	    	
+	    	if (belowFloors == 0 && aboveFloors == 0) {
+	    		//elevator.makeIdle();
+	    	} else if (topFloorCheck) {
+	    		elevator.moveUp();
+	    	} else if (belowFloors >= aboveFloors) {
+	    		elevator.moveDown();
+	    	} else {
+	    		elevator.moveUp();
+	    	}
+	    	
 		}
 	}
-
+	
 }
