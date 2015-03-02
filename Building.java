@@ -21,8 +21,12 @@ public class Building extends JFrame {
 	private ArrayList<Floor> floors = new ArrayList<>();
 	private ArrayList<Elevator> elevators = new ArrayList<>();
 	private Driver mainDriver;
+	private ElevatorStarter starter;
 
-	public Building(int driver) {
+	public Building(ElevatorStarter e, int driver) {
+		starter = e;
+		starter.clearResults();
+		
 		loadLevels();
 		
 		if (driver == 0) {
@@ -101,8 +105,11 @@ public class Building extends JFrame {
 					for (Person p : unloadedPassengers) {
 						pplServiced ++;
 						totalWaitTime += time - p.getTime();
-						System.out.println("(" + time + ")Passenger Unloaded!! Start Floor: "
-								+ p.getStart() +" End Floor: "+ e.getFloor() + " Wait: " + (time - p.getTime()));
+						String msg = "(" + time + ")Passenger Unloaded!! Start Floor: "
+								+ p.getStart() +" End Floor: "+ e.getFloor() + " Wait: " + (time - p.getTime());
+						System.out.println(msg);
+						starter.println(msg);
+						
 					}
 					//System.out.println("ELE : " + e.getFloor());
 					int pplOn = floors.get(e.getFloor()).putOnElevator(e);
@@ -120,8 +127,10 @@ public class Building extends JFrame {
 			time++; // increment the time
 		}
 		float finalResult = totalWaitTime / pplServiced;
-		System.out.println("AVG WAIT : " + finalResult + "(" + pplServiced
-				+ "," + totalWaitTime + ") Run Cost : " + runCost);
+		String msg = "AVG WAIT : " + finalResult + "(" + pplServiced
+				+ "," + totalWaitTime + ") Run Cost : " + runCost;
+		System.out.println(msg);
+		starter.println(msg);
 	}
 
 	public Elevator getElevator(int index) { return elevators.get(index); }

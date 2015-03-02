@@ -11,13 +11,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
 public class ElevatorStarter extends JFrame implements ActionListener {
 
 	JTextField numFloorsTextField = new JTextField ();
-	JTextField resultsTextField = new JTextField();	
+	JTextArea resultsTextField = new JTextArea();
+	JScrollPane scrollPane = new JScrollPane(resultsTextField);
 	
 	JLabel numFloorsLabel = new JLabel("Number of floors: ");
 	
@@ -37,7 +40,7 @@ public class ElevatorStarter extends JFrame implements ActionListener {
 	{
 		resultsTextField.setEditable(false);
 		results.setLayout(new BorderLayout());
-		results.add(resultsTextField, BorderLayout.CENTER);
+		results.add(scrollPane, BorderLayout.CENTER);
 		
 		buttons.setLayout(new GridLayout(0, 2));
 		
@@ -70,9 +73,9 @@ public class ElevatorStarter extends JFrame implements ActionListener {
 		{
 			Building b;
 			if (smartDriverButton.isSelected())
-				 b = new Building(1);
+				 b = new Building(this, 1);
 			else
-				 b = new Building(0);
+				 b = new Building(this, 0);
 		}
 		if (e.getSource() == generatorButton)
 		{
@@ -83,6 +86,13 @@ public class ElevatorStarter extends JFrame implements ActionListener {
 		}
 	}
 	
+	public void println(String s) {
+		resultsTextField.append("\n" + s);
+	}
+	
+	public void clearResults() {
+		resultsTextField.setText("");
+	}
 	public static void main (String[] args) {
 		
 		ElevatorStarter starter = new ElevatorStarter();
