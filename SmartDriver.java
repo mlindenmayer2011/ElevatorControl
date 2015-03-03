@@ -75,7 +75,7 @@ public class SmartDriver implements Driver {
 	    	}
 	    	
 		}
-	    /*
+	    
 	    if(movedUp){
 	    	for(int i = elevator.getFloor();i<m_numFloors;i++){
 	    		floors.get(i).setUpStatus(false);
@@ -84,7 +84,7 @@ public class SmartDriver implements Driver {
 	    	for(int i = elevator.getFloor();i>=0;i--){
 	    		floors.get(i).setDownStatus(false);
 	    	}
-	    }*/
+	    }
 	}
 	
 }
