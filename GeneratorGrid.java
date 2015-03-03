@@ -1,5 +1,3 @@
-package elevatorSimulator;
-
 
 
 import java.awt.BasicStroke;
@@ -19,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GeneratorGrid extends JPanel implements MouseListener, MouseMotionListener {
@@ -418,16 +417,27 @@ public class GeneratorGrid extends JPanel implements MouseListener, MouseMotionL
 			System.out.println("Invalid Input: ");
 		}
 		
+		boolean error = false;
+		String errorMsg = null;
+		
 		if (!isValidLine(probArrival)) {
-			System.out.println("Problem with probability of arrivals.");
-			return;
+			errorMsg = "Problem with probability of arrivals.";
+			error = true;
 		} else if (!isValidLine(probUp)) {
-			System.out.println("Problem with probability of going up.");
-			return;
+			errorMsg = "Problem with probability of going up.";
+			error = true;
 		} else if (!isValidLine(probLeaving)) {
-			System.out.println("Problem with probability of going down.");
-			return;
+			errorMsg = "Problem with probability of going down.";
+			error = true;
 		} 
+		
+		if (error) {
+
+		    errorMsg += "\nProbability line must fill entire timeline.";
+			JOptionPane.showMessageDialog(this, errorMsg, "error", JOptionPane.ERROR_MESSAGE);
+			System.out.println(errorMsg);
+			return;
+		}
 		
 		out.println(numFloors + " " + numElevators);
 		

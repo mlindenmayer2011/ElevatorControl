@@ -1,5 +1,3 @@
-package elevatorSimulator;
-
 
 
 import java.awt.BorderLayout;
@@ -117,13 +115,17 @@ public class GeneratorControls extends JPanel {
 				generator.setSelectedLine(3);
 			}
 			if(e.getSource() == saveResults) {
-				int floors = Integer.parseInt(numFloorsText.getText());
-				int elevators = Integer.parseInt(numElevatorsText.getText());
-				double totalTime = 24 * 60 * 60;
-				double probPerson = Double.parseDouble(expectedText.getText()) / totalTime;
+                try {
+			    int floors = Integer.parseInt(numFloorsText.getText());
+    			int elevators = Integer.parseInt(numElevatorsText.getText());
+	    		double totalTime = 24 * 60 * 60;
+		    	double probPerson = Double.parseDouble(expectedText.getText()) / totalTime;
 				generator.setNumFloors(floors);
 				generator.setNumElevators(elevators);
 				generator.saveResults (probPerson);
+                } catch (Exception error) {
+                    System.out.println("invalid input");
+                }
 			}
 			
 		}	

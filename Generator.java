@@ -1,5 +1,3 @@
-package elevatorSimulator;
-
 
 
 import java.awt.BasicStroke;

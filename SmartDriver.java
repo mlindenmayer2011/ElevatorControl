@@ -1,4 +1,3 @@
-package elevatorSimulator;
 
 import java.util.ArrayList;
 

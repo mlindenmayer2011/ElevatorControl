@@ -1,4 +1,3 @@
-package elevatorSimulator;
 
 //Used to store specified variables
 //that are required to move a person
